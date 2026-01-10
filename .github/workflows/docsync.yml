@@ -1,0 +1,42 @@
+name: DocSync Validation
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  docsync:
+    name: Validate changes against documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Claude Code
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Claude Code CLI
+        run: |
+          npm install -g @anthropic-ai/claude-code
+
+      - name: Install DocSync plugin
+        run: |
+          claude plugin marketplace add ./claude-docsync-plugin
+          claude plugin install docsync@docsync-marketplace
+
+      - name: Run DocSync validation
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: /docsync:docsync
+          claude_args: --max-turns 15
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
