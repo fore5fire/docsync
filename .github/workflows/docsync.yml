@@ -7,6 +7,7 @@ on:
 permissions:
   contents: read
   pull-requests: write
+  id-token: write
 
 jobs:
   docsync:
@@ -26,10 +27,13 @@ jobs:
           claude plugin marketplace add ./claude-docsync-plugin
           claude plugin install docsync@docsync-marketplace
 
-      - name: Run Claude Code with DocSync (OAuth)
+      - name: Run Claude Code with DocSync
         uses: anthropics/claude-code-action@v1
         with:
           prompt: /docsync:docsync
           claude_args: --max-turns 15
         env:
+          # OAuth: Set up via "claude /install-github-app" (recommended for Claude Max/Pro)
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # API Key: Alternative for direct API users
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
