@@ -13,6 +13,7 @@ DocSync spawns one subagent per documentation file in your `docs/` directory. Ea
 - **Flexible Formats**: Supports `.md`, `.txt`, `.rst`, and `.adoc` documentation
 - **Custom Paths**: Validate against any documentation directory
 - **Structured Output**: Clear PASS/FAIL/WARNING status for each document
+- **GitHub Actions**: Automated validation on pull requests
 
 ## Installation
 
@@ -34,6 +35,35 @@ cd claude-docsync-plugin
 # Validate against subdirectory
 /docsync docs/api/
 ```
+
+## GitHub Actions Setup
+
+To automatically validate documentation compliance on every pull request:
+
+```bash
+# Install the GitHub Action workflow
+/install-docsync-github-action
+```
+
+This command creates `.github/workflows/docsync.yml` which:
+- Runs on all pull requests
+- Installs the DocSync plugin
+- Validates changes against documentation
+- Supports both OAuth and API key authentication
+
+### Authentication
+
+Choose one authentication method for the GitHub Action:
+
+**Option 1: OAuth (Recommended for Claude Max/Pro)**
+```bash
+claude /install-github-app
+```
+This automatically sets up the `CLAUDE_CODE_OAUTH_TOKEN` secret.
+
+**Option 2: API Key**
+1. Get your API key from: https://console.anthropic.com/
+2. Add it as a repository secret named `ANTHROPIC_API_KEY`
 
 ## How It Works
 
@@ -113,12 +143,13 @@ Subagents spawned: 3
 
 ```
 claude-docsync-plugin/
-├── install.sh              # Installation script
-├── README.md               # This file
+├── install.sh                      # Installation script
+├── README.md                       # This file
 ├── commands/
-│   └── docsync.md          # /docsync slash command
+│   ├── docsync.md                  # /docsync slash command
+│   └── install-docsync-github-action.md  # Install GitHub Action
 └── skills/
-    └── docsync-validator.md # Subagent instruction template
+    └── docsync-validator.md        # Subagent instruction template
 ```
 
 ## License
