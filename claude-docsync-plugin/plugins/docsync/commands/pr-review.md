@@ -27,6 +27,31 @@ You are the /docsync:pr-review command. Your job is to validate that git changes
 
 This command requires GitHub CLI (`gh`) to be installed and authenticated. When running in GitHub Actions, authentication is automatically provided via `GITHUB_TOKEN`.
 
+### Step 0: Verify gh CLI is installed
+
+Before proceeding, verify that `gh` CLI is available:
+
+<command_output>
+!`which gh && gh --version`
+</command_output>
+
+If `gh` is not found, display an error and exit:
+```
+ERROR: GitHub CLI (gh) is not installed.
+
+Please install gh:
+  macOS:   brew install gh
+  Linux:   See https://github.com/cli/cli#installation
+  Windows: winget install --id GitHub.cli
+
+In GitHub Actions, add this step before running this command:
+  - name: Install GitHub CLI
+    run: |
+      curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+      echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+      sudo apt-get update && sudo apt-get install -y gh
+```
+
 ### Step 1: Determine the docs directory
 
 Set `DOCS_DIR` to:
