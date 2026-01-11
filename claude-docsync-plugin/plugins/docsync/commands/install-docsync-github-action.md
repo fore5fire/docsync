@@ -71,11 +71,10 @@ jobs:
         with:
           prompt: /docsync:docsync
           claude_args: --max-turns 15
-        env:
           # OAuth: Set up via "claude /install-github-app" (recommended for Claude Max/Pro)
-          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           # API Key: Alternative for direct API users
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
 ```
 
 ### Step 4: Verify installation
