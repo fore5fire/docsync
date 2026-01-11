@@ -27,10 +27,10 @@ jobs:
           claude plugin marketplace add ./claude-docsync-plugin
           claude plugin install docsync@docsync-marketplace
 
-      - name: Run Claude Code with DocSync
+      - name: Run Claude Code with DocSync PR Review
         uses: anthropics/claude-code-action@v1
         with:
-          prompt: /docsync:docsync
+          prompt: /docsync:pr-review
           claude_args: --max-turns 15
           # OAuth: Set up via "claude /install-github-app" (recommended for Claude Max/Pro)
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
