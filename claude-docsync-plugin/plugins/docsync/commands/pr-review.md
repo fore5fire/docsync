@@ -29,27 +29,13 @@ This command requires GitHub CLI (`gh`) to be installed and authenticated. When 
 
 **Important**: This command only works in a GitHub Actions pull_request context. For local development, use `/docsync` instead.
 
-### Step 0: Verify GitHub Actions context
+### Step 0: Verify gh CLI is installed
 
-Check if running in GitHub Actions PR context:
+Verify `gh` CLI is installed using the Bash tool:
 
-<command_output>
-!`echo "GITHUB_EVENT_NAME: $GITHUB_EVENT_NAME" && echo "GITHUB_EVENT_PATH: $GITHUB_EVENT_PATH" && echo "GITHUB_REF_NAME: $GITHUB_REF_NAME"`
-</command_output>
-
-If `GITHUB_EVENT_NAME` is not `pull_request`, display error and exit:
+```bash
+which gh && gh --version
 ```
-ERROR: This command only works in a GitHub Actions pull_request context.
-Current event: $GITHUB_EVENT_NAME
-
-For local validation, use /docsync instead.
-```
-
-Verify `gh` CLI is installed:
-
-<command_output>
-!`which gh && gh --version`
-</command_output>
 
 If `gh` is not found, display an error and exit:
 ```
