@@ -73,7 +73,7 @@ jobs:
           claude_args: --max-turns 15
         env:
           # OAuth: Set up via "claude /install-github-app" (recommended for Claude Max/Pro)
-          CLAUDE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           # API Key: Alternative for direct API users
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 ```
