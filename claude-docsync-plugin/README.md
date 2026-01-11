@@ -1,19 +1,24 @@
 # DocSync Plugin for Claude Code
 
-Validate git changes against project documentation using parallel subagents.
+Validate git changes against project documentation and automatically generate topic-based docs.
 
 ## Overview
 
-DocSync spawns one subagent per documentation file in your `docs/` directory. Each subagent independently analyzes your git changes to ensure they comply with the rules and conventions defined in its assigned documentation.
+DocSync provides two main capabilities:
+
+1. **`/docsync`**: Validates git changes against existing documentation using parallel subagents
+2. **`/docinit`**: Explores your repository and automatically generates topic-based documentation
 
 ## Features
 
 - **Parallel Validation**: Multiple documentation files analyzed simultaneously
+- **Auto-Documentation**: Generate docs from codebase using AI exploration
 - **Git Integration**: Automatically detects staged and unstaged changes
 - **Flexible Formats**: Supports `.md`, `.txt`, `.rst`, and `.adoc` documentation
 - **Custom Paths**: Validate against any documentation directory
 - **Structured Output**: Clear PASS/FAIL/WARNING status for each document
 - **GitHub Actions**: Automated validation on pull requests
+- **Project Agnostic**: Works for software, infrastructure, data, hardware, and more
 
 ## Installation
 
@@ -35,6 +40,35 @@ cd claude-docsync-plugin
 # Validate against subdirectory
 /docsync docs/api/
 ```
+
+## Generate Documentation
+
+The `/docinit` command analyzes your repository and automatically generates topic-based documentation:
+
+```bash
+# Generate docs in default docs/ directory
+/docinit
+
+# Custom organization
+/docinit put architecture docs under docs/architecture/
+
+# Organize by feature
+/docinit organize by feature: docs/features/
+```
+
+**How it works:**
+1. Two Explore subagents analyze your codebase:
+   - **Architecture pass**: Identifies structural components, design patterns, organization
+   - **Features pass**: Identifies concrete features, capabilities, user-facing outcomes
+2. Parallel subagents document each topic in separate `.md` files
+3. Works for any project type: software, infrastructure, data, hardware, etc.
+
+**Each generated document includes:**
+- Overview and purpose
+- Implementation details
+- Related files
+- Configuration requirements
+- Dependencies and integrations
 
 ## GitHub Actions Setup
 
@@ -147,6 +181,7 @@ claude-docsync-plugin/
 ├── README.md                       # This file
 ├── commands/
 │   ├── docsync.md                  # /docsync slash command
+│   ├── docinit.md                  # /docinit slash command
 │   └── install-docsync-github-action.md  # Install GitHub Action
 └── skills/
     └── docsync-validator.md        # Subagent instruction template
