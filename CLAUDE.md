@@ -5,6 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Latest Changes
 
 - Added `/docsync:pr-review` command for GitHub PR integration
+- Added `additional_permissions` to bypass bash approval checks
 
 ## Project Overview
 
