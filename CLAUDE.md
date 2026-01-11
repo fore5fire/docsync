@@ -2,6 +2,10 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Latest Changes
+
+- Added `/docsync:pr-review` command for GitHub PR integration
+
 ## Project Overview
 
 Bottle is a Claude Code plugin marketplace project focused on documentation synchronization and validation tools. The main product is the **DocSync plugin** - a tool that validates git changes against project documentation using parallel subagents.
