@@ -61,13 +61,13 @@ Supported formats: .md, .txt, .rst, .adoc
 
 ### Step 4: Get git changes
 
-Use `gh pr diff` to get changed files:
+Use `gh pr diff --name-only` to get changed files:
 
 ```bash
-gh pr diff --name-status
+gh pr diff --name-only
 ```
 
-Parse the output to get the list of changed files with their status (added, modified, deleted).
+Parse the output to get the list of changed files.
 
 If no changes found, display:
 ```
