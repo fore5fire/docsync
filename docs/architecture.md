@@ -55,6 +55,7 @@ Aggregate and display results
 2. **Isolated Validation**: Each subagent works independently on one document
 3. **Flexible Formats**: Supports common documentation file types
 4. **Git Integration**: Automatically detects changes in working directory and staging area
+5. **Naming Convention**: All slash command files MUST use kebab-case (e.g., `my-command.md`, not `MyCommand.md` or `my_command.md`)
 
 ### Technology Stack
 
