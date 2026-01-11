@@ -40,9 +40,10 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           prompt: /docsync:pr-review
-          claude_args: --max-turns 15
+          claude_args: |
+            --max-turns 15
+            --allowedTools "Read,Glob,Grep,Task,Write,Edit,Bash(git:*),Bash(gh pr view:*),Bash(gh pr review:*),Bash(gh pr diff:*),Bash(gh pr comment:*)"
           show_full_output: true
-          additional_permissions: "bypass_all_permissions"
           # OAuth: Set up via "claude /install-github-app" (recommended for Claude Max/Pro)
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           # API Key: Alternative for direct API users
